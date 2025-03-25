@@ -1,0 +1,54 @@
+<p>home works!</p>
+<div>{{result}}</div>
+
+
+@for(item of data; track item.id; let index = $index){
+<p>{{index}} {{item.name}}</p>
+}
+@empty{
+<p>No data found</p>
+}
+
+
+<span>Date: {{StartDate | date:'MM/dd/yy'}}</span>
+
+<p>Price: {{LoanAmount | number: '4.3-6'}}</p>
+
+
+<p *ngIf="templateCheck; else contetentTemplate">This is to test the template</p>
+
+<ng-template #contetentTemplate>
+    <p>This is used to show the template content</p>
+</ng-template>
+
+<h2>{{heading}}</h2>
+
+<input type="text" #changeValue [value]="heading" (keyup)="changeDetectValue(changeValue.value)">
+<div>
+  <br>  <button class="btn primary" #triggercontent>Display the defer content</button>
+</div>
+
+@defer(on interaction(triggercontent)) {
+    <div class="users">
+@for(userList of userData; track $index){
+    <div>Name: {{userList.name}}</div>
+    <div>Age: {{userList.age}}</div>
+    <div>Email: {{userList.email}}</div>
+    <div>City: {{userList.city}}</div> 
+    <br>
+}
+@empty {
+    <div>No data Found!</div>
+}
+</div>
+}
+@placeholder() {
+    <div>This is placeholder!</div>
+}
+<!-- @loading() {
+    <div>The content is loading........</div>
+} -->
+
+<div>Count: {{count()}}</div>
+<div>Derived Count: {{derivedCounter()}}</div>
+<button class="btn" (click)="increment()">Increment</button>
