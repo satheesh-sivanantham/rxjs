@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { from, Observable, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rxjs-practice',
@@ -11,6 +11,7 @@ export class RxjsPracticeComponent {
   agents!: Observable<string>;
   agentName: string = '';
   private subscription!: Subscription;
+  //of operator
   studentnameList = ['Jhon','Doe','Smith', 'Angel'];
   students$:Observable<string[]>= of(this.studentnameList);
   studentName$:Observable<string> = of('Hanna');
@@ -19,6 +20,10 @@ export class RxjsPracticeComponent {
     Name:'Nirmal'
   }
   studentObservableObj$:Observable<any> = of(this.studentObj)
+  //From Operator
+  electronicsArr = ['Phone', 'Radio','Tv','Earbud'];
+  electronics$ = from(this.electronicsArr);
+
   constructor() { }
 
   ngOnInit() {
@@ -59,6 +64,11 @@ export class RxjsPracticeComponent {
     //Object to observable 
     this.studentObservableObj$.subscribe(data => {
       console.log('of operator3', data)
+    })
+    //<---------------------------------------------------------------->
+    //From operator subcription
+    this.electronics$.subscribe(data => {
+      console.log('From Operator', data)
     })
   }
   ngOnDestroy() {
