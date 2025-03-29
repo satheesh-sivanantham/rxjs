@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast } from 'rxjs';
+import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast, first, last } from 'rxjs';
 import { FormsModule } from '@angular/forms'; 
 
 @Component({
@@ -116,7 +116,9 @@ export class RxjsPracticeComponent {
     .subscribe(data => {
       console.log('debounce', data)
       this.electronics$.pipe(
-        takeLast(2)             //takeLast Operator
+        // takeLast(2)             //takeLast Operator
+        // first()                 //first Operator
+        last()                    //last Operator
       )
       .subscribe(data2 => {
         console.log(data2)
