@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast, first, last } from 'rxjs';
-import { FormsModule } from '@angular/forms'; 
+import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast, first, last, elementAt, distinct } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rxjs-practice',
@@ -22,20 +22,20 @@ export class RxjsPracticeComponent {
   }
   studentObservableObj$: Observable<any> = of(this.studentObj)
   //From Operator
-  electronicsArr = ['Phone', 'Radio', 'Tv', 'Earbud'];
+  electronicsArr = ['Phone', 'Tv', 'Radio', 'Phone', 'Tv', 'Earbud'];
   electronics$ = from(this.electronicsArr);
 
   //debounceTime
-  searchItem:string = '';
+  searchItem: string = '';
   searchData$ = of(this.searchItem)
   private searchSubject = new Subject<string>()
-  
+
   @ViewChild('validate')
-  validateData!:ElementRef;
+  validateData!: ElementRef;
 
   constructor() {
 
-   }
+  }
 
   ngOnInit() {
     this.subscribeSearchData();
@@ -81,7 +81,7 @@ export class RxjsPracticeComponent {
     this.electronics$.subscribe(data => {
       console.log('From Operator', data)
     })
-    
+
     //<----------------------------Interval Operator------------------------------>
     // this.electronics$.subscribe(data => {
     //   const seqNumb$ = interval(1000);
@@ -94,43 +94,45 @@ export class RxjsPracticeComponent {
   }
 
   // From event handler
-  fromEventHandler(){
-    const btnObservable$ = fromEvent(this.validateData?.nativeElement,'click');
+  fromEventHandler() {
+    const btnObservable$ = fromEvent(this.validateData?.nativeElement, 'click');
 
     btnObservable$.subscribe(data => {
       console.log('fromEvent', data)
     })
   }
-  
-//<--------------debounceTime and take  Operator --------------> 
-  searchData(){
+
+  //<--------------debounceTime and take  Operator --------------> 
+  searchData() {
     this.searchSubject.next(this.searchItem);
   }
 
-  subscribeSearchData(){
+  subscribeSearchData() {
     this.searchSubject.pipe(
       // take(3),
       takeWhile((v) => this.checkCondition(v)), // takeWhile operator
-      debounceTime(3000)
+      // debounceTime(3000)
     )
-    .subscribe(data => {
-      console.log('debounce', data)
-      this.electronics$.pipe(
-        // takeLast(2)             //takeLast Operator
-        // first()                 //first Operator
-        last()                    //last Operator
-      )
-      .subscribe(data2 => {
-        console.log(data2)
+      .subscribe(data => {
+        // console.log('debounce', data)
+        this.electronics$.pipe(
+          // takeLast(2)             //takeLast Operator
+          // first()                 //first Operator
+          // last()                    //last Operator
+          // elementAt(1)                //elementAt Operator
+          distinct()
+        )
+          .subscribe(data2 => {
+            console.log(data2)
+          })
       })
-    })
   }
 
-  checkCondition(value:any){
+  checkCondition(value: any) {
     return value.length > 5 ? false : true;
   }
 
-//<--------------debounceTime and take  Operator--------------> 
+  //<--------------debounceTime and take  Operator--------------> 
 
 
   //Avoid memory leak

@@ -33,3 +33,12 @@
     - This will emit the last two value 
 # First Operator 
     - It will give the first value emmited by the observables 
+# Last Operator
+    - It will give the last value emmited by the observables 
+# ElementAt  Operartor 
+    - This will give you single value from the source observables based upon index given 
+    - Usecase: if you want the particular position value from the array this operator will help you 
+# Filter Operator 
+    - This operator wil give filtered value from the source observables based on the condition satisfied 
+# Distinct Operator
+    - Distinct operator will give all the values from source observables that distinct when compared with the previous value 
