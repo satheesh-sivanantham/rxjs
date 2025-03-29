@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take } from 'rxjs';
+import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast } from 'rxjs';
 import { FormsModule } from '@angular/forms'; 
 
 @Component({
@@ -109,13 +109,25 @@ export class RxjsPracticeComponent {
 
   subscribeSearchData(){
     this.searchSubject.pipe(
-      take(3),
+      // take(3),
+      takeWhile((v) => this.checkCondition(v)), // takeWhile operator
       debounceTime(3000)
     )
     .subscribe(data => {
       console.log('debounce', data)
+      this.electronics$.pipe(
+        takeLast(2)             //takeLast Operator
+      )
+      .subscribe(data2 => {
+        console.log(data2)
+      })
     })
   }
+
+  checkCondition(value:any){
+    return value.length > 5 ? false : true;
+  }
+
 //<--------------debounceTime and take  Operator--------------> 
 
 

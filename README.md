@@ -23,7 +23,13 @@
             -> so we need to  delay the api call untill type letters in the search input 
             -> For this case we debounceTime operator 
 # Take operator 
-    - In some use cases if you want to take two value and you dont need remaining means u can use this operator 
+    - In some use cases if you want to emit two value and you dont need remaining means u can use this operator 
 
 # Pipe 
     - pipe is nothing but pipeline through which you will send some operators and which will give the output that's the observables
+# Take while 
+    - Take while will emit the value and check the condition, wheather the condition met or not 
+# Take Last Operator 
+    - This will emit the last two value 
+# First Operator 
+    - It will give the first value emmited by the observables 
