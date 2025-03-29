@@ -8,3 +8,8 @@
 }
 <!-- From event example -->
  <button class="btn" #validate (click)="fromEventHandler()">Click me!</button>
+
+<br>
+<br>
+<!-- Search item  -->
+ <input type="text" [(ngModel)]="searchItem" (keyup)="searchData()">

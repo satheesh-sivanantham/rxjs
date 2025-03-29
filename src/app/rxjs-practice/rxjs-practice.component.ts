@@ -1,9 +1,10 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription, interval } from 'rxjs';
+import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take } from 'rxjs';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-rxjs-practice',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './rxjs-practice.component.html',
   styleUrl: './rxjs-practice.component.scss'
 })
@@ -24,12 +25,21 @@ export class RxjsPracticeComponent {
   electronicsArr = ['Phone', 'Radio', 'Tv', 'Earbud'];
   electronics$ = from(this.electronicsArr);
 
+  //debounceTime
+  searchItem:string = '';
+  searchData$ = of(this.searchItem)
+  private searchSubject = new Subject<string>()
+  
   @ViewChild('validate')
   validateData!:ElementRef;
 
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
+    this.subscribeSearchData();
+
     //Basic observable creation 
     // this.agents = new Observable(
     //   function (observer) {
@@ -91,6 +101,23 @@ export class RxjsPracticeComponent {
       console.log('fromEvent', data)
     })
   }
+  
+//<--------------debounceTime and take  Operator --------------> 
+  searchData(){
+    this.searchSubject.next(this.searchItem);
+  }
+
+  subscribeSearchData(){
+    this.searchSubject.pipe(
+      take(3),
+      debounceTime(3000)
+    )
+    .subscribe(data => {
+      console.log('debounce', data)
+    })
+  }
+//<--------------debounceTime and take  Operator--------------> 
+
 
   //Avoid memory leak
   ngOnDestroy() {

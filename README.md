@@ -14,3 +14,16 @@
 # Interval Operator 
     - It will do some operation after certain time of interval 
     - Use case: If you need a sequencial number and you want thant number to be generated after certains interval of time 
+# debounceTime Operator 
+    - If you want to emit data after a certain time you can use this operator 
+    - Use cases 
+        *Search : 
+            -> User type the values in the input and the api will call 
+            -> if the user type fast and the api calls also needs to be fast 
+            -> so we need to  delay the api call untill type letters in the search input 
+            -> For this case we debounceTime operator 
+# Take operator 
+    - In some use cases if you want to take two value and you dont need remaining means u can use this operator 
+
+# Pipe 
+    - pipe is nothing but pipeline through which you will send some operators and which will give the output that's the observables
