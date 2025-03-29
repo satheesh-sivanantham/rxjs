@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { from, fromEvent, Observable, of, Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-rxjs-practice',
@@ -71,6 +71,16 @@ export class RxjsPracticeComponent {
     this.electronics$.subscribe(data => {
       console.log('From Operator', data)
     })
+    
+    //<----------------------------Interval Operator------------------------------>
+    // this.electronics$.subscribe(data => {
+    //   const seqNumb$ = interval(1000);
+    //   seqNumb$.subscribe(num => {
+    //     if(num < 5 ){
+    //     console.log('Interval', data + num);
+    //     }
+    //   })
+    // })
   }
 
   // From event handler

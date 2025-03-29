@@ -11,3 +11,6 @@
     that changed into observables by this event.
     - Use case: 
         *User shoudn't allowed to click 3 or more time immediatly 
+# Interval Operator 
+    - It will do some operation after certain time of interval 
+    - Use case: If you need a sequencial number and you want thant number to be generated after certains interval of time 
