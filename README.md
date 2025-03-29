@@ -5,4 +5,9 @@
 # Form Operator
     - From operator will create an obervable from array, array like object, promise, an itratable object 
     - It wont create an observable from string 
-    
+# From event operator 
+    - Create an observable from the event 
+    - For example if we have an input that have some events like onclick, mouse hover. So when we click on the input its emit the value
+    that changed into observables by this event.
+    - Use case: 
+        *User shoudn't allowed to click 3 or more time immediatly 
