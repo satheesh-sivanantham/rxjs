@@ -42,3 +42,5 @@
     - This operator wil give filtered value from the source observables based on the condition satisfied 
 # Distinct Operator
     - Distinct operator will give all the values from source observables that distinct when compared with the previous value 
+# Skip Operator 
+    - Skip operator will give back an observable that will skip the first occurance of count items as a input 

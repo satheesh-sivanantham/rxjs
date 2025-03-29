@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast, first, last, elementAt, distinct } from 'rxjs';
+import { from, fromEvent, Observable, of, Subscription, interval, debounceTime, Subject, take, takeWhile, takeLast, first, last, elementAt, distinct, skip } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -120,7 +120,8 @@ export class RxjsPracticeComponent {
           // first()                 //first Operator
           // last()                    //last Operator
           // elementAt(1)                //elementAt Operator
-          distinct()
+          distinct(),                  //distinct Operator 
+          skip(2)
         )
           .subscribe(data2 => {
             console.log(data2)
